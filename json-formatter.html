@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Viewer</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            align-items: top;
+            justify-content: center;
+            #height: 200vh;
+        }
+
+        #container {
+            width: 100%;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            #border-radius: 5px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        #json-area {
+            width: 100%;
+            height: 40vw;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #formatted-json {
+            width: 100%;
+            height: 300px;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="container">
+        <h1>JSON Viewer</h1>
+
+        <button onclick="formatJson()">Format JSON</button>
+        <button onclick="stringifyJson()">Remove Whitespace</button>
+        <button onclick="clearArea()">Clear</button>
+        <br>
+
+        <textarea id="json-area" placeholder="Enter your JSON here"></textarea>
+    </div>
+
+    <script>
+        function formatJson() {
+            try {
+                const userInput = document.getElementById('json-area').value;
+                const parsedJson = JSON.parse(userInput);
+                const formattedJson = JSON.stringify(parsedJson, null, 2);
+                document.getElementById('json-area').value = formattedJson;
+            } catch (error) {
+                alert('Invalid JSON format. Please check your input and try again.');
+            }
+        }
+
+        function stringifyJson() {
+            try {
+                const userInput = document.getElementById('json-area').value;
+                const parsedJson = JSON.parse(userInput);
+                const formattedJson = JSON.stringify(parsedJson);
+                document.getElementById('json-area').value = formattedJson;
+            } catch (error) {
+                alert('Invalid JSON format. Please check your input and try again.');
+            }
+        }
+
+        function clearArea() {
+            document.getElementById('json-area').value = '';
+        }
+    </script>
+
+</body>
+</html>
